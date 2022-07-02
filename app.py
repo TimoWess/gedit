@@ -3,12 +3,14 @@ import requests
 import os
 import json
 
-if not os.path.exists("./auth.json"):
+authPath = os.path.join(os.path.dirname(os.path.abspath(__file__)), "./auth.json")
+
+if not os.path.exists(authPath):
     print("No authentication file found!")
     print("Please add an auth.json file containing your username and password!")
     exit()
 
-f = open("auth.json")
+f = open(authPath)
 
 
 data = json.load(f)
