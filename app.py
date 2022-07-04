@@ -7,8 +7,18 @@ authPath = os.path.join(os.path.dirname(os.path.abspath(__file__)), "./auth.json
 
 if not os.path.exists(authPath):
     print("No authentication file found!")
-    print("Please add an auth.json file containing your username and password!")
-    exit()
+    i = input("Generate file for you? Y/N\n").lower()
+    if i == "y":
+        auth = {}
+        auth["username"] = input("Input username: ")
+        print("Visit https://github.com/settings/tokens and generate a token with the gist scope!")
+        auth["token"] = input("Paste token: ")
+        jsonData = json.dumps(auth)
+        f = open(authPath, "w")
+        f.write(jsonData)
+    else:
+        print("Please add an auth.json file containing your username and token!")
+        exit()
 
 f = open(authPath)
 
@@ -26,7 +36,7 @@ for gist in r.json():
 
 counter = 1
 for (id, name) in gists:
-    print(str(counter).zfill(2) + ": " + name + ": " + id)
+    print(str(counter).zfill(len(str(len(gists)))) + ": " + name + ": " + id)
     counter += 1
 
 num = input("Please chooses a gist: ")
