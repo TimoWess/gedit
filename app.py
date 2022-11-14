@@ -25,7 +25,7 @@ f = open(authPath)
 
 data = json.load(f)
 
-r = requests.get("https://api.github.com/users/TimoWess/gists", auth=(data["username"], data["token"]))
+r = requests.get(f"https://api.github.com/users/{data['username']}/gists", auth=(data["username"], data["token"]))
 if r.status_code != 200:
     print("Request failed!")
     exit()
